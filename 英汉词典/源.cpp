@@ -8,7 +8,7 @@ typedef struct wor
     wor* next;
 }*pword;
 
-void free(pword *words)//ÊÍ·ÅÄÚ´æ
+void free(pword *words)//é‡Šæ”¾å†…å­˜
 {
     pword p = nullptr, mid = nullptr;
     for (int i = 0; i < 26; i++)
@@ -41,7 +41,7 @@ void print(pword *words)
     }
 }
 
-int enquiry(pword* words, char* s)//²éÑ¯
+int enquiry(pword* words, char* s)//æŸ¥è¯¢
 {
     pword p = nullptr;
     p = words[s[0] - 97];
@@ -49,7 +49,7 @@ int enquiry(pword* words, char* s)//²éÑ¯
     {
         if (strcmp(s, p->eng) == 0)
         {
-            cout << "²éÑ¯µ½£º\n";
+            cout << "æŸ¥è¯¢åˆ°ï¼š\n";
             cout << p->eng << "\n";
             cout << p->chi << "\n";
             cout << "-------------\n";
@@ -57,11 +57,11 @@ int enquiry(pword* words, char* s)//²éÑ¯
         }
         p = p->next;
     }
-    cout << "Î´ÕÒµ½\n";
+    cout << "æœªæ‰¾åˆ°\n";
     return 0;
 }
 
-int delet(pword* words, char* s)//É¾³ý
+int delet(pword* words, char* s)//åˆ é™¤
 {
     pword* p = nullptr;
     pword mid = nullptr;
@@ -70,7 +70,7 @@ int delet(pword* words, char* s)//É¾³ý
     {
         if (strcmp(s, (*p)->eng) == 0)
         {
-            cout << "ÒÑÉ¾³ý\n";
+            cout << "å·²åˆ é™¤\n";
             mid = *p;
             *p = (*p)->next;
             delete[] mid->eng;
@@ -80,7 +80,7 @@ int delet(pword* words, char* s)//É¾³ý
         }
         p = &(*p)->next;
     }
-    cout << "Î´ÕÒµ½\n";
+    cout << "æœªæ‰¾åˆ°\n";
     return 0;
 }
 
@@ -90,9 +90,9 @@ int insert(pword* words)
     pword mid = nullptr;
     char s[10] = { 0 };
     char c[10] = { 0 };
-    cout << "ÊäÈëÒª²åÈëµÄµ¥´Ê\n";
+    cout << "è¾“å…¥è¦æ’å…¥çš„å•è¯\n";
     cin >> s;
-    cout << "ÊäÈëµ¥´ÊµÄ·­Òë\n";
+    cout << "è¾“å…¥å•è¯çš„ç¿»è¯‘\n";
     cin >> c;
     if (enquiry(words, s))return 0;
     p = &words[s[0] - 97];
@@ -103,14 +103,14 @@ int insert(pword* words)
     memmove(mid->chi, c, strlen(c) + 1);
     mid->next = *p;
     *p = mid;
-    cout << "ÒÑ²åÈë\n";
+    cout << "å·²æ’å…¥\n";
     return 1;
 }
 
-void write(pword* words)//Ð´ÎÄ¼þ
+void write(pword* words)//å†™æ–‡ä»¶
 {
-    char s[] = "´Êµä\\a.txt";
-    ofstream file; //ÒÔÎÄ±¾Ä£Ê½´ò¿ª
+    char s[] = "è¯å…¸\\a.txt";
+    ofstream file; //ä»¥æ–‡æœ¬æ¨¡å¼æ‰“å¼€
     pword p = nullptr;
     for (int i = 0; i < 26; i++)
     {
@@ -127,12 +127,12 @@ void write(pword* words)//Ð´ÎÄ¼þ
     }
 }
 
-void read(pword* words)//¶ÁÈ¡ÎÄ¼þ
+void read(pword* words)//è¯»å–æ–‡ä»¶
 {
-    char s[] = "´Êµä\\a.txt";
+    char s[] = "è¯å…¸\\a.txt";
     char c[20] = { 0 };
     pword* p = nullptr;
-    ifstream file; //ÒÔÎÄ±¾Ä£Ê½´ò¿ªin.txt±¸¶Á
+    ifstream file; //ä»¥æ–‡æœ¬æ¨¡å¼æ‰“å¼€in.txtå¤‡è¯»
     for (int i = 0; i < 26; i++)
     {
         file.open(s, ios::in);
@@ -155,27 +155,27 @@ void read(pword* words)//¶ÁÈ¡ÎÄ¼þ
 
 int main()
 {
-    pword words[26] = { 0 };//¹þÏ£Á´µØÖ··¨
+    pword words[26] = { 0 };//å“ˆå¸Œé“¾åœ°å€æ³•
     char s[10] = { 0 }, c = 0;
     read(words);
     int choose = 1;
     while (choose != 5)
     {
         cout << "------------------------------------------\n";
-        cout << "1.²éÑ¯ 2.É¾³ý 3.²åÈë 4.´òÓ¡ËùÓÐµ¥´Ê 5.ÍË³ö\n";
-        cout << "ÊäÈëÑ¡Ïî\n";
+        cout << "1.æŸ¥è¯¢ 2.åˆ é™¤ 3.æ’å…¥ 4.æ‰“å°æ‰€æœ‰å•è¯ 5.é€€å‡º\n";
+        cout << "è¾“å…¥é€‰é¡¹\n";
         cin >> choose; c = getchar();
         switch (choose)
         {
         case 1:
             memset(s, 0, 10);
-            cout << "ÊäÈëÒª²éÕÒµÄµ¥´Ê\n";
+            cout << "è¾“å…¥è¦æŸ¥æ‰¾çš„å•è¯\n";
             cin >> s; c = getchar();
             enquiry(words, s);
             break;
         case 2:
             memset(s, 0, 10);
-            cout << "ÊäÈëÒªÉ¾³ýµÄµ¥´Ê\n";
+            cout << "è¾“å…¥è¦åˆ é™¤çš„å•è¯\n";
             cin >> s; c = getchar();
             delet(words, s);
             break;
@@ -191,6 +191,6 @@ int main()
     }
     //write(words);
     free(words);/**/
-    _CrtDumpMemoryLeaks();//Visual Studio µ÷ÊÔÆ÷ÄÚ´æÐ¹Â¶¼ì²â
+    _CrtDumpMemoryLeaks();//Visual Studio è°ƒè¯•å™¨å†…å­˜æ³„éœ²æ£€æµ‹
     return 0;
 }
